@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const cards = document.querySelectorAll(".team-card");
+  const mentorProfiles = document.querySelectorAll(".mentor-profile-trigger");
   const revealElements = document.querySelectorAll(
     ".section-heading, .about-copy, .about-image-frame, .mentor-card, .team-card"
   );
@@ -104,6 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalName = document.querySelector("#profile-modal-name");
   const modalOrigin = document.querySelector("#profile-modal-origin");
   const modalNpm = document.querySelector("#profile-modal-npm");
+  const modalRole = document.querySelector("#profile-modal-role");
+  const modalMotto = document.querySelector("#profile-modal-motto");
+  const modalHobby = document.querySelector("#profile-modal-hobby");
+  const modalDream = document.querySelector("#profile-modal-dream");
   let lastFocusedCard = null;
 
   const closeModal = () => {
@@ -117,15 +122,23 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const openModal = (card) => {
-    const photo = card.querySelector(".team-photo-frame img");
-    const name = card.querySelector(".team-info h3");
-    const details = card.querySelectorAll(".team-info p");
+    const isMentorProfile = card.matches(".mentor-profile-trigger");
+    const photo = isMentorProfile
+      ? card.closest(".mentor-card").querySelector(".portrait-frame img")
+      : card.querySelector(".team-photo-frame img");
+    const name = isMentorProfile ? card : card.querySelector(".team-info h3");
+    const details = isMentorProfile ? [] : card.querySelectorAll(".team-info p");
+    const profile = card.dataset;
 
     modalPhoto.src = photo.getAttribute("src");
     modalPhoto.alt = photo.getAttribute("alt");
     modalName.textContent = name.textContent;
-    modalOrigin.textContent = details[0]?.textContent || "Belum diisi";
-    modalNpm.textContent = details[1]?.textContent || "Belum diisi";
+    modalOrigin.textContent = profile.origin || details[0]?.textContent || "Belum diisi";
+    modalNpm.textContent = profile.npm || details[1]?.textContent || "Belum diisi";
+    modalRole.textContent = profile.role || "Anggota Kelompok 20";
+    modalMotto.textContent = profile.motto || "Belum diisi";
+    modalHobby.textContent = profile.hobby || "Belum diisi";
+    modalDream.textContent = profile.dream || "Belum diisi";
     lastFocusedCard = card;
 
     modal.classList.add("is-open");
@@ -144,6 +157,11 @@ document.addEventListener("DOMContentLoaded", () => {
         openModal(card);
       }
     });
+  });
+
+  mentorProfiles.forEach((profile) => {
+    profile.setAttribute("aria-haspopup", "dialog");
+    profile.addEventListener("click", () => openModal(profile));
   });
 
   modal.querySelectorAll("[data-modal-close]").forEach((element) => {

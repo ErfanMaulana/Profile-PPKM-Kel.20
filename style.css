@@ -241,6 +241,20 @@ a {
   font-weight: 600;
 }
 
+.mentor-profile-trigger {
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.mentor-profile-trigger:hover,
+.mentor-profile-trigger:focus-visible {
+  color: var(--yellow);
+}
+
 .person-info p,
 .team-info p {
   font-size: 18px;
