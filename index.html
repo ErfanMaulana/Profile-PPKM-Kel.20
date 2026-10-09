@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- Metadata halaman dan pemuatan font serta stylesheet utama. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Kelompok 20 PPKM Informatika 2026">
@@ -12,6 +13,7 @@
 </head>
 <body>
 
+  <!-- Pemutar musik latar yang dapat dikontrol oleh pengunjung. -->
   <div class="music-player">
     <audio id="background-music" preload="auto">
       <source src="assets/WhatsApp%20Audio%202026-10-06%20at%2018.26.57.mpeg" type="audio/mpeg">
@@ -19,6 +21,7 @@
     <button id="music-toggle" type="button" aria-pressed="false">Putar lagu</button>
   </div>
 
+  <!-- Navigasi tetap untuk berpindah ke setiap bagian halaman. -->
   <header class="site-header">
     <nav class="navbar container" aria-label="Navigasi utama">
       <a class="nav-link" href="#about">ABOUT US</a>
@@ -28,6 +31,7 @@
   </header>
 
   <main>
+    <!-- Bagian pembuka yang menampilkan identitas/logo kelompok. -->
     <section class="hero" aria-label="Kelompok 20">
       <div class="hero-logo-wrap">
         <img
@@ -39,6 +43,7 @@
       </div>
     </section>
 
+    <!-- Informasi singkat mengenai Kelompok 20. -->
     <section class="about section container" id="about">
       <div class="section-heading">
         <h1>ABOUT US</h1>
@@ -65,6 +70,7 @@
       </div>
     </section>
 
+    <!-- Profil mentor yang dapat diklik untuk melihat detail lengkap. -->
     <section class="mentor section container" id="mentor">
       <div class="section-heading">
         <h2>OUR MENTOR</h2>
@@ -84,6 +90,7 @@
       </div>
     </section>
 
+    <!-- Daftar anggota kelompok dalam bentuk kartu profil. -->
     <section class="team section container" id="team">
       <div class="section-heading">
         <h2>TEAM</h2>
@@ -205,6 +212,7 @@
     </section>
   </main>
 
+  <!-- Modal detail profil yang diisi secara dinamis oleh JavaScript. -->
   <div class="profile-modal" id="profile-modal" aria-hidden="true">
     <div class="profile-modal-backdrop" data-modal-close></div>
     <section class="profile-modal-content" role="dialog" aria-modal="true" aria-labelledby="profile-modal-name">
@@ -232,6 +240,7 @@
     </section>
   </div>
 
+  <!-- Penutup halaman. -->
   <footer class="site-footer">
     <p>KELOMPOK 20 · PPKM INFORMATIKA 2026</p>
   </footer>

@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+/*
+ * Struktur stylesheet:
+ * - aturan global dan latar halaman berada di bagian awal;
+ * - layout hero, section, mentor, dan tim mengatur isi utama;
+ * - aturan modal mengatur detail profil;
+ * - aturan paling bawah mengatur footer, dekorasi, dan pemutar musik.
+ */
+
+/* Variabel warna dan ukuran bersama untuk menjaga konsistensi desain. */
 :root {
   --black: #08080a;
   --red: #9b111e;
@@ -135,6 +144,7 @@ a {
   height: auto;
 }
 
+/* Kelas ini dipasang JavaScript untuk animasi elemen saat masuk viewport. */
 .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -262,6 +272,7 @@ a {
   font-weight: 600;
 }
 
+/* Layout grid tiga kolom untuk kartu anggota kelompok. */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 320px));
@@ -273,6 +284,7 @@ a {
   grid-column: 2;
 }
 
+/* Kartu anggota berisi foto dan identitas profil. */
 .team-card {
   min-height: 500px;
   padding: 24px 22px 22px;
@@ -319,6 +331,7 @@ a {
   overflow: hidden;
 }
 
+/* Modal ditumpuk di atas halaman dan dianimasikan saat tampil. */
 .profile-modal {
   position: fixed;
   inset: 0;
@@ -415,6 +428,7 @@ a {
   line-height: 1.15;
 }
 
+/* Format daftar detail profil berupa label dan nilai. */
 .profile-detail-list {
   display: grid;
   gap: 12px;
@@ -456,6 +470,7 @@ a {
   opacity: 0.24;
 }
 
+/* Posisi tombol musik dibuat tetap agar selalu mudah dijangkau. */
 .music-player {
   position: fixed;
   right: 24px;
@@ -463,6 +478,7 @@ a {
   z-index: 110;
 }
 
+/* Tampilan tombol putar/jeda musik. */
 #music-toggle {
   padding: 10px 16px;
   color: var(--white);

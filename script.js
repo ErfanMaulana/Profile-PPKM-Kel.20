@@ -1,3 +1,4 @@
+// Kembalikan posisi scroll ke paling atas saat halaman dimuat ulang.
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
@@ -5,21 +6,25 @@ if ("scrollRestoration" in history) {
 window.scrollTo(0, 0);
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Ambil elemen kontrol musik dan siapkan timer jeda sebelum lagu diulang.
   const music = document.querySelector("#background-music");
   const musicToggle = document.querySelector("#music-toggle");
   let loopDelay;
 
+  // Sinkronkan teks serta status aksesibilitas tombol dengan kondisi musik.
   const updateMusicButton = (isPlaying) => {
     musicToggle.textContent = isPlaying ? "Jeda lagu" : "Putar lagu";
     musicToggle.setAttribute("aria-pressed", String(isPlaying));
   };
 
+  // Memulai musik dan menangani penolakan autoplay dari browser.
   const playMusic = () => {
     music.play().then(() => updateMusicButton(true)).catch(() => {
       updateMusicButton(false);
     });
   };
 
+  // Setelah lagu selesai, musik akan diputar kembali setelah jeda 30 detik.
   music.addEventListener("ended", () => {
     updateMusicButton(false);
     loopDelay = window.setTimeout(() => {
@@ -28,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 30000);
   });
 
+  // Tombol musik berfungsi sebagai kontrol putar dan jeda.
   musicToggle.addEventListener("click", () => {
     if (music.paused) {
       window.clearTimeout(loopDelay);
@@ -40,16 +46,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Putar musik saat halaman selesai dipersiapkan.
   playMusic();
 
+  // Navigasi anchor digerakkan dengan scroll halus dan pembaruan menu aktif.
   const links = document.querySelectorAll('a[href^="#"]');
   const navLinks = document.querySelectorAll(".nav-link");
+  // Tandai tautan navigasi yang sedang mewakili section tertentu.
   const setActiveNavLink = (targetId) => {
     navLinks.forEach((navLink) => {
       navLink.classList.toggle("is-active", navLink.getAttribute("href") === targetId);
     });
   };
 
+  // Cegah perpindahan anchor bawaan agar scroll halus dapat digunakan.
   links.forEach((link) => {
     link.addEventListener("click", (event) => {
       const targetId = link.getAttribute("href");
@@ -74,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Deteksi section yang sedang terlihat untuk memperbarui menu otomatis.
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -95,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Kumpulkan kartu, sumber data profil, dan elemen-elemen modal.
   const cards = document.querySelectorAll(".team-card");
   const mentorProfiles = document.querySelectorAll(".mentor-profile-trigger");
   const revealElements = document.querySelectorAll(
@@ -111,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalDream = document.querySelector("#profile-modal-dream");
   let lastFocusedCard = null;
 
+  // Tutup modal, pulihkan scroll, lalu kembalikan fokus ke elemen sebelumnya.
   const closeModal = () => {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
@@ -121,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Isi modal dari data kartu anggota atau tombol profil mentor yang dipilih.
   const openModal = (card) => {
     const isMentorProfile = card.matches(".mentor-profile-trigger");
     const photo = isMentorProfile
@@ -147,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.querySelector(".modal-close").focus();
   };
 
+  // Kartu anggota dapat dibuka dengan klik maupun keyboard Enter/Space.
   cards.forEach((card) => {
     card.setAttribute("tabindex", "0");
     card.setAttribute("role", "button");
@@ -159,21 +174,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Aktifkan pembukaan modal untuk tombol profil mentor.
   mentorProfiles.forEach((profile) => {
     profile.setAttribute("aria-haspopup", "dialog");
     profile.addEventListener("click", () => openModal(profile));
   });
 
+  // Semua elemen yang memiliki data-modal-close dapat menutup modal.
   modal.querySelectorAll("[data-modal-close]").forEach((element) => {
     element.addEventListener("click", closeModal);
   });
 
+  // Tombol Escape menyediakan cara cepat untuk menutup modal.
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && modal.classList.contains("is-open")) {
       closeModal();
     }
   });
 
+  // Observer ini menambahkan animasi reveal ketika elemen masuk viewport.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -188,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+  // Terapkan animasi reveal pada judul, konten, gambar, dan kartu profil.
   revealElements.forEach((element) => {
     element.classList.add("reveal");
     observer.observe(element);
