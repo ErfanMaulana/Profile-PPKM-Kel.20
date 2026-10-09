@@ -38,7 +38,7 @@ body {
   animation: page-enter 700ms ease both;
   background:
     linear-gradient(rgba(8, 8, 10, 0.75), rgba(8, 8, 10, 0.75)),
-    url("assets/bg marvel avengers.png") center / 100% 100% scroll no-repeat,
+    url("assets/bg marvel.png") center top / 100% auto scroll repeat-y,
     #08080a;
 }
 
